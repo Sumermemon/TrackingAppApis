@@ -1,0 +1,326 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>RunningCompetition.API</name>
+    </assembly>
+    <members>
+        <member name="T:RunningCompetition.API.Controllers.V1.AdminController">
+            <summary>Super admin dashboard: statistics, user management, roles, permissions, settings, announcements, audit logs, and AI settings.</summary>
+        </member>
+        <member name="M:RunningCompetition.API.Controllers.V1.AdminController.GetDashboard(System.Threading.CancellationToken)">
+            <summary>Gets real-time dashboard statistics widgets (2-min cache).</summary>
+        </member>
+        <member name="M:RunningCompetition.API.Controllers.V1.AdminController.GetUsers(System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>Gets paginated list of all users.</summary>
+        </member>
+        <member name="M:RunningCompetition.API.Controllers.V1.AdminController.UpdateUserStatus(System.Guid,RunningCompetition.Application.DTOs.Users.UpdateUserStatusRequest,System.Threading.CancellationToken)">
+            <summary>Updates a user's account status (active, suspended, etc.).</summary>
+        </member>
+        <member name="M:RunningCompetition.API.Controllers.V1.AdminController.DeleteUser(System.Guid,System.Threading.CancellationToken)">
+            <summary>Soft-deletes a user account.</summary>
+        </member>
+        <member name="M:RunningCompetition.API.Controllers.V1.AdminController.GetRoles(System.Threading.CancellationToken)">
+            <summary>Gets all roles with their assigned permissions.</summary>
+        </member>
+        <member name="M:RunningCompetition.API.Controllers.V1.AdminController.CreateRole(RunningCompetition.Application.DTOs.CreateRoleRequest,System.Threading.CancellationToken)">
+            <summary>Creates a new role with assigned permissions.</summary>
+        </member>
+        <member name="M:RunningCompetition.API.Controllers.V1.AdminController.DeleteRole(System.Guid,System.Threading.CancellationToken)">
+            <summary>Deletes a non-system role.</summary>
+        </member>
+        <member name="M:RunningCompetition.API.Controllers.V1.AdminController.GetPermissions(System.Threading.CancellationToken)">
+            <summary>Gets all available permissions grouped by module.</summary>
+        </member>
+        <member name="M:RunningCompetition.API.Controllers.V1.AdminController.GetSettings(System.Threading.CancellationToken)">
+            <summary>Gets all system configuration settings.</summary>
+        </member>
+        <member name="M:RunningCompetition.API.Controllers.V1.AdminController.UpdateSetting(System.String,RunningCompetition.Application.DTOs.UpdateSettingRequest,System.Threading.CancellationToken)">
+            <summary>Updates a system setting value by key.</summary>
+        </member>
+        <member name="M:RunningCompetition.API.Controllers.V1.AdminController.GetAnnouncements(System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>Gets paginated announcements.</summary>
+        </member>
+        <member name="M:RunningCompetition.API.Controllers.V1.AdminController.CreateAnnouncement(RunningCompetition.Application.DTOs.CreateAnnouncementRequest,System.Threading.CancellationToken)">
+            <summary>Creates a new announcement.</summary>
+        </member>
+        <member name="M:RunningCompetition.API.Controllers.V1.AdminController.DeleteAnnouncement(System.Guid,System.Threading.CancellationToken)">
+            <summary>Deletes an announcement by ID.</summary>
+        </member>
+        <member name="M:RunningCompetition.API.Controllers.V1.AdminController.GetAuditLogs(System.Int32,System.Int32,System.Nullable{System.Guid},System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>Gets paginated audit logs with optional filters.</summary>
+        </member>
+        <member name="M:RunningCompetition.API.Controllers.V1.AdminController.GetAiSettings(System.Threading.CancellationToken)">
+            <summary>Gets AI coach settings.</summary>
+        </member>
+        <member name="M:RunningCompetition.API.Controllers.V1.AdminController.UpsertAiSettings(RunningCompetition.Application.DTOs.UpdateAiSettingRequest,System.Threading.CancellationToken)">
+            <summary>Creates or updates AI coach settings.</summary>
+        </member>
+        <member name="T:RunningCompetition.API.Controllers.V1.AiCoachController">
+            <summary>AI Coach: run analysis, training suggestions, and weekly reports.</summary>
+        </member>
+        <member name="M:RunningCompetition.API.Controllers.V1.AiCoachController.AnalyzeRun(System.Guid,System.Threading.CancellationToken)">
+            <summary>Analyzes a completed run session and returns AI-generated insights.</summary>
+        </member>
+        <member name="M:RunningCompetition.API.Controllers.V1.AiCoachController.SuggestTraining(System.Threading.CancellationToken)">
+            <summary>Returns AI-generated training suggestions based on recent activity.</summary>
+        </member>
+        <member name="M:RunningCompetition.API.Controllers.V1.AiCoachController.WeeklyReport(System.Threading.CancellationToken)">
+            <summary>Returns an AI-generated weekly performance report.</summary>
+        </member>
+        <member name="T:RunningCompetition.API.Controllers.V1.AuthController">
+            <summary>Handles user authentication: register, login, token refresh, logout, and password management.</summary>
+        </member>
+        <member name="M:RunningCompetition.API.Controllers.V1.AuthController.#ctor(RunningCompetition.Application.Services.AuthService)">
+            <summary>Initializes a new instance of <see cref="T:RunningCompetition.API.Controllers.V1.AuthController"/>.</summary>
+        </member>
+        <member name="M:RunningCompetition.API.Controllers.V1.AuthController.Register(RunningCompetition.Application.DTOs.Auth.RegisterRequest,System.Threading.CancellationToken)">
+            <summary>Registers a new user account.</summary>
+            <param name="request">Registration details.</param>
+            <param name="cancellationToken">Cancellation token.</param>
+            <returns>Auth tokens and user summary.</returns>
+            <response code="201">User registered successfully.</response>
+            <response code="409">Email already in use.</response>
+        </member>
+        <member name="M:RunningCompetition.API.Controllers.V1.AuthController.Login(RunningCompetition.Application.DTOs.Auth.LoginRequest,System.Threading.CancellationToken)">
+            <summary>Authenticates a user and returns JWT + refresh tokens.</summary>
+            <param name="request">Login credentials.</param>
+            <param name="cancellationToken">Cancellation token.</param>
+            <returns>Auth tokens and user summary.</returns>
+            <response code="200">Login successful.</response>
+            <response code="401">Invalid credentials or account locked.</response>
+        </member>
+        <member name="M:RunningCompetition.API.Controllers.V1.AuthController.RefreshToken(RunningCompetition.Application.DTOs.Auth.RefreshTokenRequest,System.Threading.CancellationToken)">
+            <summary>Refreshes a JWT access token using a valid refresh token.</summary>
+            <param name="request">Refresh token.</param>
+            <param name="cancellationToken">Cancellation token.</param>
+            <returns>New auth tokens.</returns>
+            <response code="200">Token refreshed successfully.</response>
+            <response code="401">Invalid or expired refresh token.</response>
+        </member>
+        <member name="M:RunningCompetition.API.Controllers.V1.AuthController.Logout(RunningCompetition.Application.DTOs.Auth.LogoutRequest,System.Threading.CancellationToken)">
+            <summary>Logs out the current user by revoking the refresh token.</summary>
+            <param name="request">Refresh token to revoke.</param>
+            <param name="cancellationToken">Cancellation token.</param>
+            <response code="200">Logout successful.</response>
+        </member>
+        <member name="M:RunningCompetition.API.Controllers.V1.AuthController.ChangePassword(RunningCompetition.Application.DTOs.Auth.ChangePasswordRequest,System.Threading.CancellationToken)">
+            <summary>Changes the authenticated user's password.</summary>
+            <param name="request">Current and new password.</param>
+            <param name="cancellationToken">Cancellation token.</param>
+            <response code="200">Password changed successfully.</response>
+            <response code="400">Current password incorrect or validation failed.</response>
+        </member>
+        <member name="M:RunningCompetition.API.Controllers.V1.AuthController.ForgotPassword(RunningCompetition.Application.DTOs.Auth.ForgotPasswordRequest,System.Threading.CancellationToken)">
+            <summary>Initiates a password reset flow by sending a reset email.</summary>
+            <param name="request">Email address.</param>
+            <param name="cancellationToken">Cancellation token.</param>
+            <response code="200">Reset email sent (if account exists).</response>
+        </member>
+        <member name="M:RunningCompetition.API.Controllers.V1.AuthController.ResetPassword(RunningCompetition.Application.DTOs.Auth.ResetPasswordRequest,System.Threading.CancellationToken)">
+            <summary>Completes a password reset using the token from the reset email.</summary>
+            <param name="request">Reset token and new password.</param>
+            <param name="cancellationToken">Cancellation token.</param>
+            <response code="200">Password reset successfully.</response>
+            <response code="400">Invalid or expired token.</response>
+        </member>
+        <member name="M:RunningCompetition.API.Controllers.V1.AuthController.VerifyEmail(System.String,System.Threading.CancellationToken)">
+            <summary>Verifies a user's email address using the verification token.</summary>
+            <param name="token">Email verification token.</param>
+            <param name="cancellationToken">Cancellation token.</param>
+            <response code="200">Email verified successfully.</response>
+            <response code="400">Invalid or expired token.</response>
+        </member>
+        <member name="T:RunningCompetition.API.Controllers.V1.LeaderboardsController">
+            <summary>Provides leaderboard data across multiple time periods and scopes.</summary>
+        </member>
+        <member name="M:RunningCompetition.API.Controllers.V1.LeaderboardsController.GetLeaderboard(RunningCompetition.Domain.Enums.LeaderboardPeriod,RunningCompetition.Domain.Enums.LeaderboardScope,System.String,System.Int32,System.Threading.CancellationToken)">
+            <summary>Gets the global leaderboard for a given period.</summary>
+            <param name="period">daily | weekly | monthly | yearly | alltime</param>
+            <param name="scope">global | city | state | country | friends</param>
+            <param name="scopeValue">Value for city/state/country scope (e.g., "NYC", "NY", "US").</param>
+            <param name="top">Number of entries to return (max 100).</param>
+        </member>
+        <member name="M:RunningCompetition.API.Controllers.V1.LeaderboardsController.GetMyRank(RunningCompetition.Domain.Enums.LeaderboardPeriod,RunningCompetition.Domain.Enums.LeaderboardScope,System.String,System.Threading.CancellationToken)">
+            <summary>Gets the current user's rank for a given period and scope.</summary>
+        </member>
+        <member name="M:RunningCompetition.API.Controllers.V1.LeaderboardsController.GetFriendsLeaderboard(RunningCompetition.Domain.Enums.LeaderboardPeriod,System.Threading.CancellationToken)">
+            <summary>Gets the friends leaderboard for the current user.</summary>
+        </member>
+        <member name="T:RunningCompetition.API.Controllers.V1.SocialController">
+            <summary>Manages friend requests and the user's friend list.</summary>
+        </member>
+        <member name="M:RunningCompetition.API.Controllers.V1.SocialController.SendFriendRequest(System.Guid,System.Threading.CancellationToken)">
+            <summary>Sends a friend request to another user.</summary>
+        </member>
+        <member name="M:RunningCompetition.API.Controllers.V1.SocialController.AcceptFriendRequest(System.Guid,System.Threading.CancellationToken)">
+            <summary>Accepts a pending friend request.</summary>
+        </member>
+        <member name="M:RunningCompetition.API.Controllers.V1.SocialController.RejectFriendRequest(System.Guid,System.Threading.CancellationToken)">
+            <summary>Rejects a pending friend request.</summary>
+        </member>
+        <member name="M:RunningCompetition.API.Controllers.V1.SocialController.RemoveFriend(System.Guid,System.Threading.CancellationToken)">
+            <summary>Removes an existing friend.</summary>
+        </member>
+        <member name="M:RunningCompetition.API.Controllers.V1.SocialController.GetFriends(System.Threading.CancellationToken)">
+            <summary>Gets the authenticated user's friend list.</summary>
+        </member>
+        <member name="M:RunningCompetition.API.Controllers.V1.SocialController.GetPendingRequests(System.Threading.CancellationToken)">
+            <summary>Gets pending friend requests received by the current user.</summary>
+        </member>
+        <member name="T:RunningCompetition.API.Controllers.V1.ReferralsController">
+            <summary>Provides referral code management and referral history.</summary>
+        </member>
+        <member name="M:RunningCompetition.API.Controllers.V1.ReferralsController.GetStats(System.Threading.CancellationToken)">
+            <summary>Gets the current user's referral statistics and code.</summary>
+        </member>
+        <member name="M:RunningCompetition.API.Controllers.V1.ReferralsController.GetReferrals(System.Threading.CancellationToken)">
+            <summary>Gets the current user's referral history.</summary>
+        </member>
+        <member name="T:RunningCompetition.API.Controllers.V1.AchievementsController">
+            <summary>Provides achievement definitions and user earned badges.</summary>
+        </member>
+        <member name="M:RunningCompetition.API.Controllers.V1.AchievementsController.GetAll(System.Threading.CancellationToken)">
+            <summary>Gets all achievement definitions.</summary>
+        </member>
+        <member name="M:RunningCompetition.API.Controllers.V1.AchievementsController.GetMine(System.Threading.CancellationToken)">
+            <summary>Gets the current user's earned achievements.</summary>
+        </member>
+        <member name="T:RunningCompetition.API.Controllers.V1.NotificationsController">
+            <summary>Manages user notifications.</summary>
+        </member>
+        <member name="M:RunningCompetition.API.Controllers.V1.NotificationsController.GetNotifications(System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>Gets paginated notifications for the current user.</summary>
+        </member>
+        <member name="M:RunningCompetition.API.Controllers.V1.NotificationsController.GetUnreadCount(System.Threading.CancellationToken)">
+            <summary>Gets the unread notification count.</summary>
+        </member>
+        <member name="M:RunningCompetition.API.Controllers.V1.NotificationsController.MarkAllRead(System.Threading.CancellationToken)">
+            <summary>Marks all notifications as read.</summary>
+        </member>
+        <member name="M:RunningCompetition.API.Controllers.V1.NotificationsController.MarkRead(System.Guid,System.Threading.CancellationToken)">
+            <summary>Marks a single notification as read.</summary>
+        </member>
+        <member name="T:RunningCompetition.API.Controllers.V1.RunsController">
+            <summary>Manages running sessions: start, pause, resume, finish, GPS, and history.</summary>
+        </member>
+        <member name="M:RunningCompetition.API.Controllers.V1.RunsController.Start(RunningCompetition.Application.DTOs.Runs.StartRunRequest,System.Threading.CancellationToken)">
+            <summary>Starts a new run session.</summary>
+        </member>
+        <member name="M:RunningCompetition.API.Controllers.V1.RunsController.Pause(System.Threading.CancellationToken)">
+            <summary>Pauses the active run session.</summary>
+        </member>
+        <member name="M:RunningCompetition.API.Controllers.V1.RunsController.Resume(System.Threading.CancellationToken)">
+            <summary>Resumes the paused run session.</summary>
+        </member>
+        <member name="M:RunningCompetition.API.Controllers.V1.RunsController.Finish(RunningCompetition.Application.DTOs.Runs.FinishRunRequest,System.Threading.CancellationToken)">
+            <summary>Finishes the active run session and processes achievements.</summary>
+        </member>
+        <member name="M:RunningCompetition.API.Controllers.V1.RunsController.UploadGps(System.Guid,RunningCompetition.Application.DTOs.Runs.GpsBatchRequest,System.Threading.CancellationToken)">
+            <summary>Batch-uploads GPS waypoints for an active session (max 100 per request).</summary>
+        </member>
+        <member name="M:RunningCompetition.API.Controllers.V1.RunsController.GetMyRuns(System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>Gets paginated run history for the authenticated user.</summary>
+        </member>
+        <member name="M:RunningCompetition.API.Controllers.V1.RunsController.GetDetail(System.Guid,System.Threading.CancellationToken)">
+            <summary>Gets a detailed run session with GPS waypoints and lap splits.</summary>
+        </member>
+        <member name="M:RunningCompetition.API.Controllers.V1.RunsController.GetStats(System.DateTime,System.DateTime,System.Threading.CancellationToken)">
+            <summary>Gets run statistics for the authenticated user over a date range.</summary>
+        </member>
+        <member name="T:RunningCompetition.API.Controllers.V1.UsersController">
+            <summary>Manages user profiles, privacy settings, and push notification preferences.</summary>
+        </member>
+        <member name="M:RunningCompetition.API.Controllers.V1.UsersController.#ctor(RunningCompetition.Application.Services.UserService)">
+            <summary>Initializes a new instance of <see cref="T:RunningCompetition.API.Controllers.V1.UsersController"/>.</summary>
+        </member>
+        <member name="M:RunningCompetition.API.Controllers.V1.UsersController.GetMyProfile(System.Threading.CancellationToken)">
+            <summary>Gets the authenticated user's full profile.</summary>
+        </member>
+        <member name="M:RunningCompetition.API.Controllers.V1.UsersController.GetProfile(System.Guid,System.Threading.CancellationToken)">
+            <summary>Gets another user's profile by ID.</summary>
+            <param name="userId">Target user ID.</param>
+        </member>
+        <member name="M:RunningCompetition.API.Controllers.V1.UsersController.UpdateProfile(RunningCompetition.Application.DTOs.Users.UpdateProfileRequest,System.Threading.CancellationToken)">
+            <summary>Updates the authenticated user's personal details.</summary>
+        </member>
+        <member name="M:RunningCompetition.API.Controllers.V1.UsersController.UpdatePrivacy(RunningCompetition.Application.DTOs.Users.UpdatePrivacyRequest,System.Threading.CancellationToken)">
+            <summary>Updates the authenticated user's privacy settings.</summary>
+        </member>
+        <member name="M:RunningCompetition.API.Controllers.V1.UsersController.UpdatePushSettings(RunningCompetition.Application.DTOs.Users.UpdatePushSettingsRequest,System.Threading.CancellationToken)">
+            <summary>Updates push notification token and preference.</summary>
+        </member>
+        <member name="M:RunningCompetition.API.Controllers.V1.UsersController.Search(System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>Searches users by name or email.</summary>
+            <param name="q">Search query.</param>
+            <param name="page">Page number.</param>
+            <param name="pageSize">Page size.</param>
+        </member>
+        <member name="T:RunningCompetition.API.Middleware.AuditMiddleware">
+            <summary>
+            Middleware that writes structured audit log entries for state-changing API operations.
+            Logs POST, PUT, PATCH, DELETE requests that succeed (2xx).
+            </summary>
+        </member>
+        <member name="T:RunningCompetition.API.Middleware.GlobalExceptionMiddleware">
+            <summary>
+            Global exception handling middleware that catches all unhandled exceptions
+            and converts them to a consistent <see cref="T:RunningCompetition.Shared.Common.ApiResponse`1"/> envelope.
+            </summary>
+        </member>
+        <member name="M:RunningCompetition.API.Middleware.GlobalExceptionMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Logging.ILogger{RunningCompetition.API.Middleware.GlobalExceptionMiddleware})">
+            <summary>Initializes a new instance of <see cref="T:RunningCompetition.API.Middleware.GlobalExceptionMiddleware"/>.</summary>
+        </member>
+        <member name="M:RunningCompetition.API.Middleware.GlobalExceptionMiddleware.InvokeAsync(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>Processes the request and catches any unhandled exceptions.</summary>
+        </member>
+        <member name="T:Program">
+            <summary>
+            Auto-generated public partial Program class for top-level statement apps.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.OpenApi.Generated.DocumentationCommentIdHelper.CreateDocumentationId(System.Type)">
+            <summary>
+            Generates a documentation comment ID for a type.
+            Example: T:Namespace.Outer+Inner`1 becomes T:Namespace.Outer.Inner`1
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.OpenApi.Generated.DocumentationCommentIdHelper.CreateDocumentationId(System.Reflection.PropertyInfo)">
+            <summary>
+            Generates a documentation comment ID for a property.
+            Example: P:Namespace.ContainingType.PropertyName or for an indexer P:Namespace.ContainingType.Item(System.Int32)
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.OpenApi.Generated.DocumentationCommentIdHelper.CreateDocumentationId(System.Type,System.String)">
+            <summary>
+            Generates a documentation comment ID for a property given its container type and property name.
+            Example: P:Namespace.ContainingType.PropertyName
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.OpenApi.Generated.DocumentationCommentIdHelper.CreateDocumentationId(System.Reflection.MethodInfo)">
+            <summary>
+            Generates a documentation comment ID for a method (or constructor).
+            For example:
+              M:Namespace.ContainingType.MethodName(ParamType1,ParamType2)~ReturnType
+              M:Namespace.ContainingType.#ctor(ParamType)
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.OpenApi.Generated.DocumentationCommentIdHelper.GetTypeDocId(System.Type,System.Boolean,System.Boolean)">
+            <summary>
+            Generates a documentation ID string for a type.
+            This method handles nested types (replacing '+' with '.'),
+            generic types, arrays, pointers, by-ref types, and generic parameters.
+            The <paramref name="includeGenericArguments"/> flag controls whether
+            constructed generic type arguments are emitted, while <paramref name="omitGenericArity"/>
+            controls whether the generic arity marker (e.g. "`1") is appended.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.OpenApi.Generated.DocumentationCommentIdHelper.NormalizeDocId(System.String)">
+            <summary>
+            Normalizes a documentation comment ID to match the compiler-style format.
+            Strips the return type suffix for ordinary methods but retains it for conversion operators.
+            </summary>
+            <param name="docId">The documentation comment ID to normalize.</param>
+            <returns>The normalized documentation comment ID.</returns>
+        </member>
+    </members>
+</doc>
